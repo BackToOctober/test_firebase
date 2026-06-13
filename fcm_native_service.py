@@ -77,10 +77,19 @@ class FCMNativeService:
             if 'error' in response_data:
                 error_details = response_data['error'].get('details', [])
                 for detail in error_details:
-                    if detail.get('errorCode') == 'UNREGISTERED':
+                    error_code = detail.get('errorCode')
+                    if error_code == 'UNREGISTERED':
+                        logger.warning("Token is unregistered or expired. Token should be removed.")
                         return False, "UNREGISTERED"
+                    elif error_code == 'SENDER_ID_MISMATCH':
+                        logger.error("Sender ID mismatch (Token belongs to a different project).")
+                        return False, "SENDER_ID_MISMATCH"
+                    elif error_code == 'QUOTA_EXCEEDED':
+                        logger.error("FCM Quota exceeded.")
+                        return False, "QUOTA_EXCEEDED"
                         
                 error_msg = response_data['error'].get('message', 'Unknown Error')
+                logger.error(f"Firebase error while sending to token: {error_msg}")
                 return False, error_msg
                 
             return False, f"HTTP {response.status_code}"
