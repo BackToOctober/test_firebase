@@ -8,9 +8,9 @@ log = logging.getLogger(__name__)
 class NotificationService:
     def __init__(self):
         try:
-            from fcm_service import FCMService
+            from fcm_native_service import FCMNativeService
             key_path = os.path.join(os.path.dirname(__file__), '..', 'serviceAccountKey.json')
-            self.fcm = FCMService(service_account_path=key_path)
+            self.fcm = FCMNativeService(service_account_path=key_path)
         except Exception as e:
             log.error(f"Error initializing FCM Service: {e}")
             self.fcm = None

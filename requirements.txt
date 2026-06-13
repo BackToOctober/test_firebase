@@ -2,3 +2,5 @@ Flask-AppBuilder>=4.3.0
 firebase-admin
 psycopg2-binary
 Flask-Migrate
+requests
+google-auth

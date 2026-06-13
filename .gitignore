@@ -1,6 +1,8 @@
 venv
 app.db
 theodoinq-ac710-firebase-adminsdk-fbsvc-d5d1fd1e15.json
+theodoinq-dbcc4-firebase-adminsdk-fbsvc-8276977fa3.json
 fcm_service_dev.py
+fcm_native_service_dev.py
 .idea
 __pycache__/
